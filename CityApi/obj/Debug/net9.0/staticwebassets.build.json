@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "t58hgst5xOSGbFVl4fDJY9YdRV5FD9xT933bVkk6A9g=",
+  "Source": "CityApi",
+  "BasePath": "_content/CityApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
