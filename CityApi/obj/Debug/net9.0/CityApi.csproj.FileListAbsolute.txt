@@ -35,3 +35,14 @@
 /home/ali/RiderProjects/CityApi/CityApi/obj/Debug/net9.0/CityApi.pdb
 /home/ali/RiderProjects/CityApi/CityApi/obj/Debug/net9.0/CityApi.genruntimeconfig.cache
 /home/ali/RiderProjects/CityApi/CityApi/obj/Debug/net9.0/ref/CityApi.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Microsoft.Extensions.DependencyModel.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.AspNetCore.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.Extensions.Hosting.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.Extensions.Logging.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.Formatting.Compact.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.Settings.Configuration.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.Sinks.Console.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.Sinks.Debug.dll
+/home/ali/RiderProjects/CityApi/CityApi/bin/Debug/net9.0/Serilog.Sinks.File.dll
+/home/ali/RiderProjects/CityApi/CityApi/obj/Debug/net9.0/CityApi.sourcelink.json
