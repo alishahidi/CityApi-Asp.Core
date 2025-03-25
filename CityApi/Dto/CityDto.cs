@@ -1,6 +1,6 @@
-namespace CityApi.Model;
+namespace CityApi.Dto;
 
-public class City
+public class CityDto
 {
     public int Id { get; set; }
     

@@ -1,5 +1,6 @@
 using CityApi.Context;
-using CityApi.Service;
+using CityApi.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,8 +23,14 @@ builder.Services.AddControllers(options => { options.ReturnHttpNotAcceptable = t
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddSingleton<CityService>();
-builder.Services.AddSingleton<CityContext>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ICityRepository, CityRepository>();
+builder.Services.AddDbContext<CityContext>(option =>
+{
+    option.UseSqlite(builder.Configuration.GetConnectionString("CityDb"));
+});
+
 
 var app = builder.Build();
 

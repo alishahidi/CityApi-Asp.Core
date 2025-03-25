@@ -1,5 +1,7 @@
+using AutoMapper;
+using CityApi.Dto;
 using CityApi.Model;
-using CityApi.Service;
+using CityApi.Repositories;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,63 +9,79 @@ namespace CityApi.Controllers;
 
 [ApiController]
 [Route("/api/Cities")]
-public class CityController(CityService cityService) : ControllerBase
+public class CityController(
+    ICityRepository _cityRepository,
+    IMapper _mapper
+    ) : ControllerBase
 {
+    // Get all cities
     [HttpGet]
-    public ActionResult<IEnumerable<City>> LoadAll()
+    public async Task<ActionResult<IEnumerable<CityDto>>> LoadAll()
     {
-        return Ok(cityService.GetCities());
+        var cities = await _cityRepository.GetCitiesAsync();
+        return Ok(_mapper.Map<IEnumerable<CityDto>>(cities));
     }
 
+    // Get city by ID
     [HttpGet("{id}")]
-    public ActionResult<City> LoadById(int id)
+    public async Task<ActionResult<City>> LoadById(int id)
     {
-        var city = cityService.FindById(id);
+        var city = await _cityRepository.GetCityByIdAsync(id);
 
         if (city == null)
         {
             return NotFound();
         }
-        
+
         return Ok(city);
     }
 
+    // Partially update a city using JSON Patch
     [HttpPatch("{id}")]
-    public ActionResult<City> Update(int id, [FromBody] JsonPatchDocument<City> patch)
+    public async Task<ActionResult<City>> Update(int id, [FromBody] JsonPatchDocument<City> patch)
     {
         if (patch == null)
         {
             return BadRequest();
         }
-        
-        var city = cityService.FindById(id);
+
+        var city = await _cityRepository.GetCityByIdAsync(id);
 
         if (city == null)
         {
             return NotFound();
         }
-        
+
         patch.ApplyTo(city, ModelState);
 
         if (!TryValidateModel(city))
         {
             return BadRequest(ModelState);
         }
-        
-        return Ok(cityService.Update(city));
+
+        return Ok(await _cityRepository.UpdateCityAsync(city));
     }
 
+    // Add a new city
     [HttpPost]
-    public ActionResult<City> Add([FromBody] City city)
+    public async Task<ActionResult<City>> Add([FromBody] City city)
     {
-        return cityService.Add(city);
+        var addedCity = await _cityRepository.AddCityAsync(city);
+        return CreatedAtAction(nameof(LoadById), new { id = addedCity.Id }, addedCity);
     }
 
+    // Delete a city
     [HttpDelete("{id}")]
-    public ActionResult<City> Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-        cityService.Delete(id);
+        var city = await _cityRepository.GetCityByIdAsync(id);
 
-        return Ok();
+        if (city == null)
+        {
+            return NotFound();
+        }
+
+        await _cityRepository.DeleteCityAsync(city);
+        return NoContent();
     }
 }
